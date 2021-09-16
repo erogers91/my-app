@@ -14,6 +14,6 @@ function show() {
     el, document.getElementById('root')
   );
 }
-setInterval(show, 1000)
+setInterva(show, 1000)
 
 
