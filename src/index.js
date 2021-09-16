@@ -1,19 +1,23 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import './index.css';
-import App from './App';
 
-const web = <App />;
-let counter = 0;
+class Counter extends React.Component {
+  state = {
+    counter: 0
+  }
+  
+  increment = () => {
+    this.setState({
+      counter: this.state.counter+1});
+  }
 
-function show() {
-  counter++;
-  const el = <p>{counter}</p>
-
-  ReactDOM.render(
-    el, document.getElementById('root')
-  );
+  render() {
+    return <div>
+      <p>{this.state.counter}</p>
+      <button onClick={this.increment}>Increment</button>
+    </div>
+  }
 }
-setInterval(show, 1000)
 
-
+const el = <Counter />;
+ReactDOM.render(el , document.getElementById('root'))

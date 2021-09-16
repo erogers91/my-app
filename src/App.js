@@ -4,8 +4,7 @@ function App() {
   return (
     <div className="App">
       <header className="App-header">
-        <h1>Hello, world!!!</h1>
-        <p>This is for learning React purposes.</p>
+        <h1>Words</h1>
       </header>
     </div>
   );
