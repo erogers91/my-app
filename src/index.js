@@ -1,14 +1,16 @@
 import React, { useState, useEffect } from 'react';
 import ReactDOM from 'react-dom';
 
-function AddPersonForm(){
-  const [ person, setPerson ] = useState("");
+function AddPersonForm(props){
+  const [ person, setPerson ] = useState('');
 
   function handleChange(e){
     setPerson(e.target.value);
   }
 
   function handleSubmit(e){
+    props.handleSubmit(person);
+    setPerson('');
     e.preventDefault();
   }
 
@@ -17,7 +19,7 @@ function AddPersonForm(){
       <input type="text"
       placeholder="Add new contact"
       onChange={handleChange}
-      vlaue={person.name} />
+      value={person} />
       <button type="submit">Add</button>
     </form>
   );
@@ -31,12 +33,22 @@ function PeopleList(props){
     return <ul>{listItems}</ul>;
 }
 
-const contacts = ["James Smith", "Thomas Anderson", "Bruce Wayne"];
-const el = (
-  <div>
-    <AddPersonForm />
-    <PeopleList data={contacts} />
-  </div>
-)
+function ContactManager(props) {
+  const [contacts, setContacts] = useState(props.data);
 
-ReactDOM.render(el, document.getElementById('root'))
+  function addPerson(name) {
+    setContacts([...contacts, name]);
+  }
+
+  return (
+    <div>
+      <AddPersonForm handleSubmit={addPerson} />
+      <PeopleList data={contacts} />
+    </div>
+  );
+} 
+
+const contacts = ["James Smith", "Thomas Anderson", "Bruce Wayne"];
+ReactDOM.render(
+  <ContactManager data={contacts} />, 
+  document.getElementById('root'))
